@@ -123,7 +123,11 @@ class Register_MFRC522_Thread(threading.Thread):
                     hexcode = binascii.hexlify(bytearray(uid)).decode('ascii')
                     logging.debug(hexcode)
                     post_json = json.dumps({"CardID": hexcode})
-                    reponse = requests.post(url_register_tag,data=post_json,headers = headers)
+                    try:
+                        reponse = requests.post(url_register_tag,data=post_json,headers = headers)
+                    except ConnectionError as e:
+                        logging.debug(e)
+
                     if reponse.status_code == 200:
                         logging.debug("OK")
                         global Check_Register
@@ -210,13 +214,13 @@ def Imagepost(ImageID,post_json):
         houston_post = json.loads(post_json)
         try:
             houston123_respone = requests.post(url_houston,files=file2,data=houston_post)
-         except ConnectionError as e:
+        except ConnectionError as e:
             logging.debug(e)
             logging.debug("houston123 fail")
 
             
         try:
-             reponse = requests.post(url_kltn,files=file)
+            reponse = requests.post(url_kltn,files=file)
         except ConnectionError as e:
             logging.debug(e)
             logging.debug("kltn fail")
