@@ -232,8 +232,8 @@ def beep():
     # GPIO.output(12, GPIO.HIGH)
     # sleep(1)
     # GPIO.output(12, GPIO.LOW)
-    p = GPIO.PWM(7, 4550)
-    p.start(10)
+    p = GPIO.PWM(7, 4000)
+    p.start(25)
     sleep(.07)
     p.stop()
 
