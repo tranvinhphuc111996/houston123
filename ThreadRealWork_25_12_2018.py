@@ -9,6 +9,7 @@ from Queue import Queue
 import json
 import binascii
 import requests
+from requests.exceptions import ConnectionError 
 import random
 import string 
 import os.path
@@ -165,9 +166,11 @@ class CheckQueue_Thread(threading.Thread):
                         post_json = json.dumps(post_data)
             
                         load_data = json.loads(post_json)
-                        threading.Timer(0.25,Imagepost,[str(load_data["ImageID"]),post_json]).start()  
-                        reponse = requests.post(url_kltn,data=post_json,headers = headers)
-
+                        threading.Timer(0.25,Imagepost,[str(load_data["ImageID"]),post_json]).start()
+                        try:
+                           reponse = requests.post(url_kltn,data=post_json,headers = headers)
+                        except ConnectionError as e:
+                           print(e)
                         logging.debug(reponse)
                         if reponse.status_code == 200:
                             GPIO.output(13, GPIO.HIGH) # Turn on
@@ -207,13 +210,15 @@ def Imagepost(ImageID,post_json):
         houston_post = json.loads(post_json)
         try:
             houston123_respone = requests.post(url_houston,files=file2,data=houston_post)
-        except ConnectionError:
+         except ConnectionError as e:
+            logging.debug(e)
             logging.debug("houston123 fail")
 
             
         try:
              reponse = requests.post(url_kltn,files=file)
-        except ConnectionError:
+        except ConnectionError as e:
+            logging.debug(e)
             logging.debug("kltn fail")
             
        
