@@ -19,7 +19,7 @@ import sys
 
 get_time = datetime.now() 
 name_log = get_time.strftime("%d_%m_%y_%H_%M_%S")
-log_stdout = '/home/pi/Desktop/log/log_'+''.join(str(name_log)) + '.log'
+log_stdout = '/home/pi/Documents/log_'+''.join(str(name_log)) + '.log'
 import logging
 logging.basicConfig(filename=str(log_stdout),level=logging.DEBUG)
 
@@ -81,7 +81,7 @@ class MFRC522_Thread(threading.Thread):
                     
                         dtime_string = str(dt.hour)+":"+str(dt.minute)+":"+str(dt.second)+"-"+str(dt.day)+"/"+str(dt.month)+"/"+str(dt.year)
                     
-                        call(["fswebcam","-d","/dev/video0", "--no-banner", "/home/pi/Desktop/Desktop/doan1/KLTN/capture/%s.jpg" % str(Image_name)])
+                        call(["fswebcam","-d","/dev/video0", "--no-banner", "/home/pi/Pictures/%s.jpg" % str(Image_name)])
                     
                         hexcode = binascii.hexlify(bytearray(uid)).decode('ascii')
                         logging.debug(hexcode)
@@ -200,7 +200,7 @@ def Imagepost(ImageID,post_json):
     url_houston = 'http://houston123.ddns.net/api/devices/chamcong'
 
     b = ImageID
-    a = '/home/pi/Desktop/Desktop/doan1/KLTN/capture/' + str(b) +'.jpg'
+    a = '/home/pi/Pictures/' + str(b) +'.jpg'
     if (os.path.isfile(a)) == True:     
         file = {'file': open(a,'rb')}
         file2 = {'file': open(a,'rb')}
