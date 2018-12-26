@@ -34,8 +34,8 @@ GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
 GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW) # Set pin 8 to be an output pin and set initial value to low (off)
 GPIO.setup(15, GPIO.OUT, initial=GPIO.LOW) # Set pin 8 to be an output pin and set initial value to low (off)
-GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW) # Di an thi su dung pin 12 cua chuong
-# GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW) # Cac trung tam khac su dung chan 7 
+# GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW) # Di an thi su dung pin 12 cua chuong
+GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW) # Cac trung tam khac su dung chan 7 
 
 
 DataQueue = Queue()
@@ -229,13 +229,13 @@ def Imagepost(ImageID,post_json):
         
 
 def beep():
-    GPIO.output(12, GPIO.HIGH)
-    sleep(1)
-    GPIO.output(12, GPIO.LOW)
-    #~ p = GPIO.PWM(7, 4550)
-    #~ p.start(10)
-    #~ sleep(.07)
-    #~ p.stop()
+    # GPIO.output(12, GPIO.HIGH)
+    # sleep(1)
+    # GPIO.output(12, GPIO.LOW)
+    p = GPIO.PWM(7, 4550)
+    p.start(10)
+    sleep(.07)
+    p.stop()
 
 
 
