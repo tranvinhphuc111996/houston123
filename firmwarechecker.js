@@ -51,7 +51,7 @@ async function check() {
 				console.log('Webcam logitech was fixed');
 			}
 		});
-        await exec('sudo apt-get install fswebcam').then(() => {
+        await exec('sudo apt-get install -y  fswebcam').then(() => {
 			console.log('Install lib fswebcam');
 		});		
         await exec('sudo pip install websocket-client').then(() => {
