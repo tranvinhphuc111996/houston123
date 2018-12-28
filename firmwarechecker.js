@@ -55,8 +55,7 @@ async function check() {
 			data = data.replace('\r', '');
 			data = data.replace('\n', '');
 			if (typeof data == 'string' && data.indexOf(autoboot) == -1) {
-				data = autoboot
-				data += '\nexit 0';
+				data = autoboot + '\n' + data;
 				console.log(data);
 				exec(`echo "${data}" > 'rc.local'`, {cwd: '/etc'}).then(() => {
 					console.log('Auto boot is adding');
