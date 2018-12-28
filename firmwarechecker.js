@@ -22,7 +22,7 @@ async function check() {
 			pid = pid.toString().split(' ');
 			for (let p of pid) {
 				try {
-					await exec(`kill -9 ${p}`);
+					await exec(`sudo kill -9 ${p}`);
 					console.log(`${p} was killed!`);
 				} catch (error) {
 					console.log(`Cant kill pid:${p}`);
@@ -52,8 +52,9 @@ async function check() {
 			data = data.replace('\r', '');
 			data = data.replace('\n', '');
 			if (typeof data == 'string' && data.indexOf(autoboot) == -1) {
-				data = data.replace('exit 0', autoboot);
+				data = autoboot
 				data += '\nexit 0';
+				console.log(data);
 				exec(`echo "${data}" > 'rc.local'`, {cwd: '/etc'}).then(() => {
 					console.log('Auto boot is adding');
 				});
