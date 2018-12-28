@@ -50,9 +50,10 @@ async function check() {
 		});
 		await fs.readFile('/etc/rc.local', 'utf8', (err, data) => {
 			data = data.replace('\r', '');
-			data = data.replace('\n', '');						
+			data = data.replace('\n', '');
 			if (typeof data == 'string' && data.indexOf(autoboot) == -1) {
-				data += autoboot;
+				data = data.replace('exit 0', autoboot);
+				data += '\nexit 0';
 				exec(`echo "${data}" > 'rc.local'`, {cwd: '/etc'}).then(() => {
 					console.log('Auto boot is adding');
 				});
