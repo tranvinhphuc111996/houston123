@@ -5,7 +5,7 @@ let fs = require('fs');
 async function check() {
 	try {
 		let fixLogitech = 'dwc_otq.fiq_enable=1 dwc_otg.fiq_fsm_enable=1 dwc_otg.fiq_fsm_mask=0x03';
-		let autoboot = 'sudo node /home/pi/Desktop/houston123/main.js'
+		//let autoboot = 'sudo node /home/pi/Desktop/houston123/main.js'
 		
 		let pid;
 		try {			
@@ -51,7 +51,7 @@ async function check() {
 				console.log('Webcam logitech was fixed');
 			}
 		});
-        await exec('apt-get install fswebcam').then(() => {
+        await exec('sudo apt-get install fswebcam').then(() => {
 			console.log('Install lib fswebcam');
 		});		
         await exec('pip install websocket-client').then(() => {
