@@ -33,6 +33,9 @@ async function check() {
 		await exec('find /home/pi/Desktop/houston123').then(() => {
 			console.log('Source is ready');
         });
+        await exec('git reset --hard origin/master', {cwd: '/home/pi/Desktop/houston123'}).then(() => {
+			console.log('Reset to branch master');
+		});
 		await exec('git pull', {cwd: '/home/pi/Desktop/houston123'}).then(() => {
 			console.log('Pull lastest version');
 		});
