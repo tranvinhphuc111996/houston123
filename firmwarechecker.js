@@ -54,10 +54,10 @@ async function check() {
         await exec('sudo apt-get install fswebcam').then(() => {
 			console.log('Install lib fswebcam');
 		});		
-        await exec('pip install websocket-client').then(() => {
+        await exec('sudo pip install websocket-client').then(() => {
 			console.log('Install lib websocket-client');
 		});
-        await exec('python setup.py install', {cwd: '/home/pi/Desktop/houston123/SPI-Py'}).then(() => {
+        await exec('sudo python setup.py install', {cwd: '/home/pi/Desktop/houston123/SPI-Py'}).then(() => {
 			console.log('Install lib SPI');
 		});
 		
