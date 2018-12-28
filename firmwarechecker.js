@@ -51,19 +51,6 @@ async function check() {
 				console.log('Webcam logitech was fixed');
 			}
 		});
-		await fs.readFile('/etc/rc.local', 'utf8', (err, data) => {
-			data = data.replace('\r', '');
-			data = data.replace('\n', '');
-			if (typeof data == 'string' && data.indexOf(autoboot) == -1) {
-				data = autoboot + '\n' + data;
-				console.log(data);
-				exec(`echo "${data}" > 'rc.local'`, {cwd: '/etc'}).then(() => {
-					console.log('Auto boot is adding');
-				});
-			} else {
-				console.log('Autoboot is ready');
-			}
-		});
         await exec('apt-get install fswebcam').then(() => {
 			console.log('Install lib fswebcam');
 		});		
