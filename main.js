@@ -4,6 +4,9 @@ let os = require('os');
 
 //firmwarechecker.update()
 
+
+
+
 function imStillALive() {
 	socket.emit('status', {status: 'keepalive', uptime: os.uptime()})
 }
